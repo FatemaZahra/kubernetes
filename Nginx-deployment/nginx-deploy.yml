@@ -1,0 +1,29 @@
+# K8 works with API versions to declare the resources
+# We have to declare the API version and the kind of service/component
+# Services: Deployment, service, pods, replicasets, crobjob, autoscaling group
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment # naming the deployment
+spec:
+  selector:
+    matchLabels:
+      app: nginx # look for this label to match with k8 service
+
+  # Let's create a replica set of this with 3 instances/pods
+  replicas:
+    3
+    # template to use it's label for k8 service to launch in the browser
+  template:
+    metadata:
+      labels:
+        app: nginx # this label connects to the service or any other k8 components
+    # Let's define the container spec
+    spec:
+      containers:
+        - name: nginx
+          image: fatemazahra/eng122_nginx_web_hosting:latest
+          ports:
+            - containerPort: 80
+# create a kubernetes nginx-service.yml to create a k8 service

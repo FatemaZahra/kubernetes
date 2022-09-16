@@ -1,0 +1,54 @@
+# ---
+# # Select the type of API version and type of service/object
+# apiVersion: v1
+# kind: Service
+# # Metadat for name
+# metadata:
+#   name: nginx-svc
+#   namespace: default # sre
+
+# # Specification to include ports Selector to connect to the deployment
+# spec:
+#   ports:
+#     - nodePort: 30442 # range is 30000 - 32768
+
+#   # Let's define the selector and label to connect to nginc deployment
+#   selector:
+#     app: nginx # this label connects this service to deployment
+
+#   # Creating Load Balancer type of deployment
+#   type: NodePort # also use Load Balancer - for local use cluster IP
+
+# Select the type of API version and type of service/object
+
+apiVersion: v1
+
+kind: Service
+
+# Metadata for name
+
+metadata:
+  name: nginx-svc
+
+  namespace: default # sre
+
+# Specificaition to include ports Selector to connecto to the deployment
+
+spec:
+  ports:
+    - nodePort: 30442 # range is 30000-32768
+
+      port: 80
+
+      protocol: TCP
+
+      targetPort: 80
+
+  # Let's define the selector and label to connect to nginx deployment
+
+  selector:
+    app: nginx # this label connects this service to deployment
+
+  # Creating NodePort type of deployment
+
+  type: NodePort # also use LoadBalancer -  for local use cluster IP
